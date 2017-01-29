@@ -1,0 +1,134 @@
+* {
+    color: #6a5750;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #f6f1ed;
+}
+
+.map-title-bar {
+    margin-top: 0px;
+    background: #30231d;
+}
+
+.map-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #f6f1ed;
+}
+
+.map-dropdown-title {
+    font-weight: 700;
+    color: #6a5750;
+}
+
+.map-dropdown-menu {
+    min-width: 40px;
+    background: #b5a397;
+}
+
+.top-bar ul {
+    background-color: #b5a397;
+}
+
+.off-canvas {
+    background: #b5a397;
+}
+
+.close-marker {
+    font-weight: 700;
+}
+
+.menu-title {
+    color: #6a5750;
+    font-weight: 700;
+}
+
+.menu-button-face {
+    color: #f6f1ed;
+    font-weight: 700;
+}
+
+.mobile-ofc .menu a {
+    height: 45px;
+    line-height: 45px;
+    color: #f6f1ed;
+    font-weight: 700;
+    font-size: 0.9em;
+    paddin-top: 0;
+    padding-buttom: 0;
+}
+
+.submenu-item {
+    padding-left: 5px;
+}
+
+.menu > li > a {
+    padding: 0px;
+}
+
+.dropdown-pane {
+    width: 70px;
+}
+
+.info-modal-title {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.info-modal {
+    font-size: 12px;
+}
+
+.callout-alert-button {
+    top: 0px;
+}
+
+.callout.alert {
+    color: #6a5750;
+    background-color: #ffcaca;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0.1rem 3.0rem 0.1rem 0.2rem;
+}
+
+.row {
+    margin: 0px;
+    padding: 2px;
+    background-color: #f6f1ed;
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    button {
+        display: block;
+        width: 100%;
+    }
+    .map-title {
+        font-size: 1.0rem;
+        font-weight: 600;
+    }
+
+    .position-left {
+        width: 150px;
+    }
+
+    .menu-title,
+    .menu-button-face {
+        font-size: 0.7em;
+    }
+
+    .dropdown-pane {
+        width: 50px;
+    }
+
+    .mobile-ofc .menu a {
+        font-size: 0.5em;
+    }
+}
