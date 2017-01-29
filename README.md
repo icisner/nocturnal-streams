@@ -94,8 +94,10 @@ python -V
 
 ## Python packages
 
-Flask is used for the server side framework. To make a request to the OpenData API endpoint,
-it uses the requests package. The requests package should be exactly the version 2.3.0 .
+Flask is used for the server side framework. To connect to the OpenData API endpoint,
+it uses the requests package. The requests package version 2.3.0 is known to work,
+especially on Google App Engine environment. However, on a simple Flask app,
+other versions should work.
 
 
 ```
@@ -110,7 +112,7 @@ Open a terminal, and run flask_main.py
 
 ```
 $ python flask_main.py 
-* Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+ * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 ```
 
 As the message shows, the server is running on port 8080.
