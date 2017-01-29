@@ -1,7 +1,7 @@
 {
     "map": {
         "url": "https://maps.googleapis.com/maps/api/js?",
-        "api-key": "AIzaSyALQwhclKKOlpNl04pj2rkWiLvyETZcHB8"
+        "api-key": "AIzaSyB3eknbza4bViyizuCbhr3vrIEOHz5GgXI"
     },
     "opendata": {
         "url": "https://data.raleighnc.gov/resource/emea-ai2t.json?",
