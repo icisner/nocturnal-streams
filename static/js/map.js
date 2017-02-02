@@ -36,30 +36,44 @@ ko.bindingHandlers.anothermap = {
 
         // Render location markers
         mapObj.onAreanameLoad = function(data) {
+            var bounds = new google.maps.LatLngBounds();
             mapObj.locations().forEach(function(loc) {
-                var content_string = "Area Name: <b>" + loc.areaname + "</b>";
-                content_string += "<br/>Click this pin for crime data"
+                var content_string = '<div class="area-info-window">Area Name: <b>';
+                content_string += loc.areaname + "</b>";
+                content_string += "<br/>Click this pin for crime data</div>"
                 var marker = new google.maps.Marker({
                     map: mapObj.googleMap,
                     position: new google.maps.LatLng(loc.lat,
                                                      loc.lng),
-                    title: loc.areaname,
+                    icon: "/static/image/red-marker.png",
                     animation: google.maps.Animation.DROP,
                     info: new google.maps.InfoWindow({
                         content: content_string
                     })
                 });
+                // Event listeners for mouseover and mouseout
+                marker.addListener("mouseover", function() {
+                    this.setIcon("/static/image/green-marker.png");
+                    this.info.open(mapObj.googleMap, this);
+                });
+                marker.addListener("mouseout", function() {
+                    this.setIcon("/static/image/red-marker.png");
+                    this.info.close();
+                });
+
                 // Load crime data when a location marker is clicked,
                 marker.addListener("click", function() {
                     updateData(mapObj, marker);
                 });
                 // Add listener function when infowindow is closed.
                 marker.info.addListener("closeclick", function() {
-                    marker.setAnimation(null);
+                    marker.setIcon("/static/image/red-marker.png");
                 });
                 // Save a marker
                 mapObj.locMarkers().push(marker);
+                bounds.extend(marker.position);
             });
+            mapObj.googleMap.fitBounds(bounds);
         }
         // Watches location data loading completion
         mapObj.locationLoaded.subscribe(mapObj.onAreanameLoad);
@@ -69,12 +83,11 @@ ko.bindingHandlers.anothermap = {
             var previous = mapObj.previousMarker();
             if (previous) {
                 previous.info.close();
-                previous.setAnimation(null);
+                previous.setIcon("/static/image/red-marker.png");
             }
             var marker = mapObj.currentMarker();
             marker.info.open(mapObj.googleMap, marker);
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-            mapObj.googleMap.setCenter(marker.position);
+            marker.setIcon("/static/image/green-marker.png");
         }
         // Watches a currentMarker state change
         mapObj.currentMarker.subscribe(mapObj.onCurrentChange);
@@ -162,7 +175,7 @@ var updateData = function(mapObj, marker) {
                 });
                 // Create an infowindow of this marker
                 var infoObj = new google.maps.InfoWindow({
-                    content: entry.content
+                    content: '<div class="crime-info-window">' + entry.content + '</div>'
                 });
                 // Add lister function when infowindow is opened.
                 marker.addListener("click", function() {
