@@ -14,20 +14,41 @@
   <br/><br/>
   <ul class="mobile-ofc vertical menu">
     <li>
-      <div class="row">
-        <div class="small-6 columns">
-          <span class="menu-title">Area</span>
+      <div class="top-bar filter-title-bar">
+        <div class="top-bar-left">
+          <span class="safe-level-title">Safe Level Filter</span>
+          <ul class="vertical menu">
+            <li class="safe-level-item has-tip" data-tooltip
+                aria-haspopup="true" data-disable="false" title="All">
+              <i class="fa fa-square fa-2x safe-level-all"
+                 aria-hidden="true"></i>
+            </li>
+            <li class="safe-level-item has-tip" data-tooltip
+                aria-haspopup="true" data-disable="false" title="Better">
+              <i class="fa fa-square fa-2x safe-level-good"
+                 aria-hidden="true"></i>
+            </li>
+            <li class="safe-level-item has-tip" data-tooltip
+                aria-haspopup="true" data-disable="false" title="Neutral">
+              <i class="fa fa-square fa-2x safe-level-neutral"
+                 aria-hidden="true"></i>
+            </li>
+            <li class="safe-level-item has-tip" data-tooltip
+                aria-haspopup="true" data-disable="false" title="Worse">
+              <i class="fa fa-square fa-2x safe-level-bad"
+                 aria-hidden="true"></i>
+            </li>
         </div>
-        <div class="small-6 columns">
-          <button class="button float-left" type="button"
+        <div class="top-bar-right">
+          <button class="button float-left tiny" type="button"
                   data-toggle="example-dropdown">
-            <span class="menu-button-face">Filter</span>
+            <span class="menu-button-face">Crime Filter</span>
           </button>
           <div class="dropdown-pane" id="example-dropdown"
                data-dropdown>
             <ul class="vertical dropdown menu">
               {% for button in buttons %}
-              <li>
+              <li class="crime-filter-button">
                 <a href="#"
                    data-bind="click: setCategory.bind($data, '{{button['category']}}')">
                   <span data-tooltip aria-haspopup="true" class="has-tip"
@@ -43,6 +64,7 @@
       </div>
     </li>
     <ul class="submenu menu vertical" data-submenu>
+      <li class="submenu-title">Area List</li>
       {% for loc in locations %}
       <li class="submenu-item">
         <a href="#"
