@@ -125,11 +125,8 @@ def getExtracted(f, lat, lng):
     # SoQL query: within_circle(field, lat, lng, radius)
     where_query = '&$where=within_circle(location, %s, %s, %s)' % (
         lat, lng, APP_CONFIG['opendata']['radius'])
-    print(where_query)
     url += where_query
-    print(url)
     response = rq.get(url)
-    print("status_code: " + str(response.status_code))
     result = []
     if response.status_code == 200:
         j_data = response.json()
