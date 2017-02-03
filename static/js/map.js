@@ -4,6 +4,8 @@
 */
 var Location = function(data) {
     this.areaname = data["name"];
+    this.safelevel = data["safelevel"];
+    this.crimecount = data["count"];
     this.lat = data["lat"];
     this.lng = data["lng"];
 }
@@ -38,9 +40,6 @@ ko.bindingHandlers.anothermap = {
         mapObj.onAreanameLoad = function(data) {
             var bounds = new google.maps.LatLngBounds();
             mapObj.locations().forEach(function(loc) {
-                var content_string = '<div class="area-info-window">Area Name: <b>';
-                content_string += loc.areaname + "</b>";
-                content_string += "<br/>Click this pin for crime data</div>"
                 var marker = new google.maps.Marker({
                     map: mapObj.googleMap,
                     position: new google.maps.LatLng(loc.lat,
@@ -48,7 +47,7 @@ ko.bindingHandlers.anothermap = {
                     icon: "/static/image/red-marker.png",
                     animation: google.maps.Animation.DROP,
                     info: new google.maps.InfoWindow({
-                        content: content_string
+                        content: locationContent(loc)
                     })
                 });
                 // Event listeners for mouseover and mouseout
@@ -137,6 +136,16 @@ var areanameData = function(mapObj) {
             $("#error-area").prepend($message);
         });
 };
+
+// Location infowindow content
+var locationContent = function(loc) {
+    content = "";
+    content += '<div class="area-info-window">Area Name: <b>';
+    content += loc.areaname + "</b><br/>";
+    content += "Number of Crimes: " + loc.crimecount + "<br/>";
+    content += "<br/>Click this pin for crime data</div>";
+    return content;
+}
 
 // Checks whether the crime marker should be visible or not
 var isVisible = function(mapObj, entry) {
