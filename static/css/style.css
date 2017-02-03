@@ -188,8 +188,7 @@ body {
     .menu-title,
     .menu-button-face,
     .submenu-title,
-    .safety-level-title,
-    .safety-level-item{
+    .safety-level-title {
         font-size: 0.7em;
     }
 
@@ -211,6 +210,6 @@ body {
     }
 
     .mobile-ofc .menu a {
-        font-size: 0.5em;
+        font-size: 0.7em;
     }
 }

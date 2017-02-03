@@ -32,14 +32,13 @@ ko.bindingHandlers.anothermap = {
         var latLng = new google.maps.LatLng(mapObj.initialLoc().lat,
                                             mapObj.initialLoc().lng);
         var mapOptions = { center: latLng,
-                           zoom: 12,
+                           zoom: 11,
                            mapTypeId: google.maps.MapTypeId.ROADMAP};
         // Render a map
         mapObj.googleMap = new google.maps.Map(element, mapOptions);
 
         // Render location markers
         mapObj.onAreanameLoad = function(data) {
-            var bounds = new google.maps.LatLngBounds();
             mapObj.locations().forEach(function(loc) {
                 var marker = new google.maps.Marker({
                     map: mapObj.googleMap,
@@ -72,9 +71,7 @@ ko.bindingHandlers.anothermap = {
                 });
                 // Save a marker
                 mapObj.locMarkers().push(marker);
-                bounds.extend(marker.position);
             });
-            mapObj.googleMap.fitBounds(bounds);
         }
         // Watches location data loading completion
         mapObj.locationLoaded.subscribe(mapObj.onAreanameLoad);
@@ -90,22 +87,13 @@ ko.bindingHandlers.anothermap = {
             marker.info.open(mapObj.googleMap, marker);
             marker.setIcon("/static/image/green-marker.png");
         }
+
         // Watches a currentMarker state change
         mapObj.currentMarker.subscribe(mapObj.onCurrentChange);
 
         // Re-render crime markers looking at a current category state
         mapObj.onChangedCrimeFilter = function(data) {
             filterCrimeMarkers(mapObj);
-            // var size = mapObj.crimeMarkers().length;
-            // var markers = mapObj.crimeMarkers();
-            // for(var i=0; i<markers.length; i++) {
-            //     var m = markers[i];
-            //     if ("all" == mapObj.category() || m.category == mapObj.category()) {
-            //         m.setVisible(true);
-            //     } else {
-            //         m.setVisible(false);
-            //     }
-            // }
         }
 
         // Watches a category(filter) state change
@@ -149,7 +137,7 @@ var areanameData = function(mapObj) {
         });
 };
 
-// Location infowindow content
+// Create location infowindow content
 var locationContent = function(loc) {
     content = "";
     content += '<div class="area-info-window">Area Name: <b>';
@@ -159,6 +147,7 @@ var locationContent = function(loc) {
     return content;
 }
 
+// Delete all crime markers
 var clearCrimeMarkers = function(mapObj) {
     // Clear all markers currently shown
     while(mapObj.crimeMarkers().length > 0) {
@@ -167,10 +156,10 @@ var clearCrimeMarkers = function(mapObj) {
     }
 }
 
+// Filter crime markers
 var filterCrimeMarkers = function(mapObj) {
     var filter = mapObj.category();
     if ("clear" == filter) {
-        console.log(filter);
         clearCrimeMarkers(mapObj);
         mapObj.category("all");
         if ($("#crime-dropdown").hasClass("is-open")) {
@@ -190,6 +179,7 @@ var filterCrimeMarkers = function(mapObj) {
     }
 }
 
+// Filter location markers
 var filterLocations = function(mapObj) {
     var locations = mapObj.locations();
     var markers = mapObj.locMarkers();
@@ -198,8 +188,6 @@ var filterLocations = function(mapObj) {
         var loc = locations[i];
         var itemId = "#" + loc.id;
         if (0 == level || loc.safetylevel == level) {
-            console.log($(itemId));
-            console.log(level + " == " + loc.safetylevel + (level == loc.safetylevel));
             if ($(itemId).hasClass("hide")) {
                 $(itemId).removeClass("hide");
             }
