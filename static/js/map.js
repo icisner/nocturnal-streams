@@ -143,7 +143,7 @@ var locationContent = function(loc) {
     content += '<div class="area-info-window">Area Name: <b>';
     content += loc.areaname + "</b><br/>";
     content += "Number of Crimes: " + loc.crimecount + "<br/>";
-    content += "<br/>Click this pin for crime data</div>";
+    content += "<br/><b>Click</b> the pin for this area's crime data</div>";
     return content;
 }
 
