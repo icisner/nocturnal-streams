@@ -44,56 +44,6 @@ CATEGORIES = {
     }
 
 
-# Location list
-AREAS = [
-    {'name': 'Brier Creek',
-     'lat': 35.912697,
-     'lng': -78.781792},
-    {'name': 'Cameron Village',
-     'lat': 35.789403,
-     'lng': -78.663048},
-    {'name': 'Crabtree Pines',
-     'lat': 35.862744,
-     'lng': -78.711886},
-    {'name': 'Downtown',
-     'lat': 35.778315,
-     'lng': -78.640196},
-    {'name': 'Laurel Hills',
-     'lat': 35.833097,
-     'lng': -78.698538},
-    {'name': 'Mordecai',
-     'lat': 35.797566,
-     'lng': -78.629338},
-    {'name': 'Northeast Raleigh',
-     'lat': 35.867382,
-     'lng': -78.563709},
-    {'name': 'North Hills',
-     'lat': 35.834982,
-     'lng': -78.638971},
-    {'name': 'North Raleigh',
-     'lat': 35.879601,
-     'lng': -78.625057},
-    {'name': 'Six Forks North',
-     'lat': 35.900966,
-     'lng': -78.652319},
-    {'name': 'Six Forks South',
-     'lat': 35.819788,
-     'lng': -78.623952},
-    {'name': 'Southwest Raleigh',
-     'lat': 35.768438,
-     'lng': -78.694160},
-    {'name': 'Stonehenge',
-     'lat': 35.882922,
-     'lng': -78.679141},
-    {'name': 'Umstead',
-     'lat': 35.890672,
-     'lng': -78.750061},
-    {'name': 'Wade',
-     'lat': 35.809230,
-     'lng': -78.734234}
-    ]
-
-
 def category(words):
     """Given words (title), returns its category"""
     for listed in KEEP_LIST:
