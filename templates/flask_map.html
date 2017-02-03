@@ -37,8 +37,8 @@
           </div>
         </div>
         <div class="top-bar-right">
-          <button class="button float-right small" type="button"
-                  data-toggle="crime-dropdown">
+          <button id="crime-filter-button" class="button float-right small" type="button"
+                  data-toggle="crime-dropdown" disabled>
             <span class="menu-button-face">Crime Filter</span>
           </button>
           <div class="dropdown-pane crime-dropdown" id="crime-dropdown"
@@ -64,7 +64,7 @@
       <li class="submenu-title">Area List</li>
       {% for loc in locations %}
       <li class="submenu-item"
-          id="{{loc['name']}}"
+          id="{{loc['id']}}"
           data-bind="event: { mouseover:
           setCurrent.bind($data,'{{loop.index}}','{{loc['lat']}}','{{loc['lng']}}')}">
         <a class="location-item" href="#"

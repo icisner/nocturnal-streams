@@ -48,10 +48,10 @@ def koMarkedMap():
     """The neighborhood map application."""
     url = utils.APP_CONFIG['map']['url']
     url = url + 'key='+ utils.APP_CONFIG['map']['api-key']
-    buttons = [{'category': 'all', 'image': '/static/image/check_all.png', 'desc': 'All'}]
+    buttons = [{'category': 'clear', 'image': '/static/image/uncheck_all.png', 'desc': 'Clear All'},
+               {'category': 'all', 'image': '/static/image/check_all.png', 'desc': 'All'}]
     for cat in sorted(crime.DESC):
         buttons.append({'category': cat, 'image': crime.DESC[cat][0], 'desc': crime.DESC[cat][1]})
-    buttons.append({'category': 'none', 'image': '/static/image/uncheck_all.png', 'desc': 'None'})
     safety_levels = [
         {'style': 'safety-level-all', 'title': 'All', 'level': 0},
         {'style': 'safety-level-good', 'title': 'Better', 'level': 1},

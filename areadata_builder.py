@@ -94,6 +94,7 @@ def getCounts():
             area['count'] = count[0]
     return AREAS
 
+
 def createData():
     areaData = getCounts()
     areas = sorted(areaData, key=lambda x: x['count'])
@@ -103,6 +104,7 @@ def createData():
         if index % chunk_size == 0:
             level += 1
         area['safelevel'] = level
+        area['id'] = area['name'].replace(" ", "").lower()
     f = open('area-data.json', 'w')
     json.dump(areas, f)
     f.close()

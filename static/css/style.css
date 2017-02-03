@@ -134,7 +134,7 @@ body {
 }
 
 .crime-dropdown {
-    width: 70px;
+    width: 100px;
     background-color: #f6f1ed;
 }
 
@@ -202,7 +202,7 @@ body {
     }
 
     .crime-dropdown {
-        width: 50px;
+        width: 80px;
     }
 
     .submenu a,

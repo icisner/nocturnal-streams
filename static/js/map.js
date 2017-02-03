@@ -3,8 +3,9 @@
 * @param {Object} data - location data
 */
 var Location = function(data) {
+    this.id = data["id"]
     this.areaname = data["name"];
-    this.safelevel = data["safelevel"];
+    this.safetylevel = data["safelevel"];
     this.crimecount = data["count"];
     this.lat = data["lat"];
     this.lng = data["lng"];
@@ -48,7 +49,8 @@ ko.bindingHandlers.anothermap = {
                     animation: google.maps.Animation.DROP,
                     info: new google.maps.InfoWindow({
                         content: locationContent(loc)
-                    })
+                    }),
+                    safetylevel: loc.safetylevel
                 });
                 // Event listeners for mouseover and mouseout
                 marker.addListener("mouseover", function() {
@@ -92,23 +94,26 @@ ko.bindingHandlers.anothermap = {
         mapObj.currentMarker.subscribe(mapObj.onCurrentChange);
 
         // Re-render crime markers looking at a current category state
-        mapObj.onChangedFilter = function(data) {
-            var size = mapObj.crimeMarkers().length;
-            var markers = mapObj.crimeMarkers();
-            for(var i=0; i<markers.length; i++) {
-                var m = markers[i];
-                if ("all" == mapObj.category() || m.category == mapObj.category()) {
-                    m.setVisible(true);
-                } else {
-                    m.setVisible(false);
-                }
-            }
+        mapObj.onChangedCrimeFilter = function(data) {
+            filterCrimeMarkers(mapObj);
+            // var size = mapObj.crimeMarkers().length;
+            // var markers = mapObj.crimeMarkers();
+            // for(var i=0; i<markers.length; i++) {
+            //     var m = markers[i];
+            //     if ("all" == mapObj.category() || m.category == mapObj.category()) {
+            //         m.setVisible(true);
+            //     } else {
+            //         m.setVisible(false);
+            //     }
+            // }
         }
-        // Watches a category(filter) state change
-        mapObj.category.subscribe(mapObj.onChangedFilter);
 
+        // Watches a category(filter) state change
+        mapObj.category.subscribe(mapObj.onChangedCrimeFilter);
+
+        // Show only requested location names and markers
         mapObj.onChangedSafetyLevel = function(data) {
-            console.log(mapObj.safetyLevel());
+            filterLocations(mapObj);
         }
 
         // Watches a safetyLevel state change
@@ -154,6 +159,66 @@ var locationContent = function(loc) {
     return content;
 }
 
+var clearCrimeMarkers = function(mapObj) {
+    // Clear all markers currently shown
+    while(mapObj.crimeMarkers().length > 0) {
+        m = mapObj.crimeMarkers().shift()
+        m.setMap(null);
+    }
+}
+
+var filterCrimeMarkers = function(mapObj) {
+    var filter = mapObj.category();
+    if ("clear" == filter) {
+        console.log(filter);
+        clearCrimeMarkers(mapObj);
+        mapObj.category("all");
+        if ($("#crime-dropdown").hasClass("is-open")) {
+            $("#crime-dropdown").removeClass("is-open");
+        }
+        $("#crime-filter-button").attr("disabled", '')
+    } else {
+        var markers = mapObj.crimeMarkers();
+        for(var i=0; i<markers.length; i++) {
+            var m = markers[i];
+            if ("all" == filter || m.category == filter) {
+                m.setVisible(true);
+            } else {
+                m.setVisible(false);
+            }
+        }
+    }
+}
+
+var filterLocations = function(mapObj) {
+    var locations = mapObj.locations();
+    var markers = mapObj.locMarkers();
+    var level = mapObj.safetyLevel()
+    for(var i=0; i<locations.length; i++) {
+        var loc = locations[i];
+        var itemId = "#" + loc.id;
+        if (0 == level || loc.safetylevel == level) {
+            console.log($(itemId));
+            console.log(level + " == " + loc.safetylevel + (level == loc.safetylevel));
+            if ($(itemId).hasClass("hide")) {
+                $(itemId).removeClass("hide");
+            }
+            $(itemId).addClass("show");
+        } else {
+            if ($(itemId).hasClass("show")) {
+                $(itemId).removeClass("show");
+            }
+            $(itemId).addClass("hide");
+        }
+        var marker = markers[i];
+        if (0 == level || marker.safetylevel == level) {
+            marker.setVisible(true);
+        } else {
+            marker.setVisible(false);
+        }
+    }
+}
+
 // Checks whether the crime marker should be visible or not
 var isVisible = function(mapObj, entry) {
     if ("all" == mapObj.category()) {
@@ -167,11 +232,8 @@ var isVisible = function(mapObj, entry) {
 
 // Load crime data
 var updateData = function(mapObj, marker) {
-    // Clear all markers in the old place
-    while(mapObj.crimeMarkers().length > 0) {
-        m = mapObj.crimeMarkers().shift()
-        m.setMap(null);
-    }
+    // Clear crime markers in an old location
+    clearCrimeMarkers(mapObj);
     var lat = marker.position.lat();
     var lng = marker.position.lng();
     // Make a request to API endpoint
@@ -206,6 +268,7 @@ var updateData = function(mapObj, marker) {
                 mapObj.crimeMarkers().push(marker);
             }
         });
+        $("#crime-filter-button").removeAttr("disabled")
         mapObj.googleMap.setCenter(marker.position);
         mapObj.googleMap.setZoom(16);
     })
