@@ -105,6 +105,7 @@ def createData():
             level += 1
         area['safelevel'] = level
         area['id'] = area['name'].replace(" ", "").lower()
+    areas = sorted(areas, key=lambda x: x['name'])
     f = open('area-data.json', 'w')
     json.dump(areas, f)
     f.close()
