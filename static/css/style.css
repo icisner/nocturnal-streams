@@ -75,37 +75,38 @@ body {
     color: #f6f1ed;
 }
 
-.safe-level-title {
+.safety-level-title {
     color: #6a5750;
     font-weight: 700;
 }
 
-.safe-level-item {
+.safety-level-item {
     color: #6a5750;
     font-weight: 700;
     font-size: 0.8em;
-    padding-left: 15px;
+    padding-left: 3px;
+    padding-right: 2px;
 }
 
 .menu.vertical li:hover {
     background-color: #d4ccc7;
 }
 
-.safe-level-all {
+.safety-level-all {
     color: #e4ddd7;
     text-shadow: 1px 1px 1px #ccc;
 }
 
-.safe-level-good {
+.safety-level-good {
     color: #249e24;
     text-shadow: 1px 1px 1px #ccc;
 }
 
-.safe-level-neutral {
+.safety-level-neutral {
     color: #f7c90f;
     text-shadow: 1px 1px 1px #ccc;
 }
-.safe-level-bad {
+.safety-level-bad {
     color: #ea0000;
     text-shadow: 1px 1px 1px #ccc;
 }
@@ -177,8 +178,8 @@ body {
     .menu-title,
     .menu-button-face,
     .submenu-title,
-    .safe-level-title,
-    .safe-level-item{
+    .safety-level-title,
+    .safety-level-item{
         font-size: 0.7em;
     }
 

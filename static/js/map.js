@@ -106,6 +106,13 @@ ko.bindingHandlers.anothermap = {
         }
         // Watches a category(filter) state change
         mapObj.category.subscribe(mapObj.onChangedFilter);
+
+        mapObj.onChangedSafetyLevel = function(data) {
+            console.log(mapObj.safetyLevel());
+        }
+
+        // Watches a safetyLevel state change
+        mapObj.safetyLevel.subscribe(mapObj.onChangedSafetyLevel);
     }
 };
 
@@ -223,6 +230,8 @@ var mapModel = function() {
         initialLoc: ko.observable(),
         // all location markers
         locMarkers: ko.observableArray([]),
+        // safety level of locations, 1-3
+        safetyLevel: ko.observable(0),
         // previous location marker
         previousMarker: ko.observable(),
         // current location marker
@@ -233,13 +242,18 @@ var mapModel = function() {
         category: ko.observable("all"),
     });
 
-    // Change a current location
+    // Change the current location
     this.setCurrent = function(index, lat, lng) {
         self.mapState().previousMarker(self.mapState().currentMarker());
         self.mapState().currentMarker(self.mapState().locMarkers()[parseInt(index)-1]);
     };
 
-    // Change a current category (filter)
+    // Change the current safety level
+    this.setSafetyLevel = function(data) {
+        self.mapState().safetyLevel(data);
+    }
+
+    // Change the current category (filter)
     this.setCategory = function(data) {
         self.mapState().category(data);
     };

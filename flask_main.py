@@ -51,7 +51,16 @@ def koMarkedMap():
     buttons = [{'category': 'all', 'image': '/static/image/check_all.png', 'desc': 'All'}]
     for cat in sorted(crime.DESC):
         buttons.append({'category': cat, 'image': crime.DESC[cat][0], 'desc': crime.DESC[cat][1]})
-    return render_template('flask_map.html', url=url, buttons=buttons, locations=AREAS)
+    buttons.append({'category': 'none', 'image': '/static/image/uncheck_all.png', 'desc': 'None'})
+    safety_levels = [
+        {'style': 'safety-level-all', 'title': 'All', 'level': 0},
+        {'style': 'safety-level-good', 'title': 'Better', 'level': 1},
+        {'style': 'safety-level-neutral', 'title': 'Average', 'level': 2},
+        {'style': 'safety-level-bad', 'title': 'Worse', 'level': 3}
+    ]
+    return render_template('flask_map.html',
+                           url=url, buttons=buttons,
+                           safety_levels=safety_levels, locations=AREAS)
 
 
 @app.errorhandler(500)
