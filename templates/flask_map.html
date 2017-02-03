@@ -16,26 +16,32 @@
     <li>
       <div class="top-bar filter-title-bar">
         <div class="top-bar-left">
-          <span class="safety-level-title">Safe Level Filter</span>
-          <ul class="menu">
-            {% for safety in safety_levels %}
-            <li class="safety-level-item"
-                data-bind="event: {
-                           mouseover: setSafetyLevel.bind($data, '{{safety['level']}}')}">
-              <i class="fa fa-square fa-2x {{safety['style']}} has-tip"
-                 data-tooltip
-                 aria-hidden="true"
-                 aria-haspopup="true" data-disable="false"
-                 title="{{safety['title']}}"></i>
-            </li>
-            {% endfor %}
+          <button class="button small" type="button"
+                  data-toggle="safety-dropdown">
+            <span class="menu-button-face">Safety Filter</span>
+          </button>
+          <div class="dropdown-pane safety-dropdown" id="safety-dropdown" data-dropdown>
+            <ul class="menu">
+              {% for safety in safety_levels %}
+              <li class="safety-level-item"
+                  data-bind="event: {
+                             mouseover: setSafetyLevel.bind($data, '{{safety['level']}}')}">
+                <i class="fa fa-square fa-2x {{safety['style']}} has-tip"
+                   data-tooltip
+                   aria-hidden="true"
+                   aria-haspopup="true" data-disable="false"
+                   title="{{safety['title']}}"></i>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
         <div class="top-bar-right">
-          <button class="button float-left tiny" type="button"
-                  data-toggle="example-dropdown">
+          <button class="button float-right small" type="button"
+                  data-toggle="crime-dropdown">
             <span class="menu-button-face">Crime Filter</span>
           </button>
-          <div class="dropdown-pane" id="example-dropdown"
+          <div class="dropdown-pane crime-dropdown" id="crime-dropdown"
                data-dropdown>
             <ul class="vertical dropdown menu">
               {% for button in buttons %}
@@ -61,7 +67,7 @@
           id="{{loc['name']}}"
           data-bind="event: { mouseover:
           setCurrent.bind($data,'{{loop.index}}','{{loc['lat']}}','{{loc['lng']}}')}">
-        <a href="#"
+        <a class="location-item" href="#"
            data-bind="click: setCurrent.bind($data,'{{loop.index}}','{{loc['lat']}}','{{loc['lng']}}')">
           {{loc['name']}}
         </a>

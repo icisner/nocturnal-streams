@@ -61,7 +61,12 @@ body {
 }
 
 .filter-title-bar {
+    height: 60px;
     background-color: #f6f1ed;
+}
+
+.filter-title-bar .top-bar-right button {
+    margin-top: 0px;
 }
 
 .top-bar ul {
@@ -123,7 +128,12 @@ body {
     padding: 0px;
 }
 
-.dropdown-pane {
+.safety-dropdown {
+    padding: 5px;
+    width: 120px;
+}
+
+.crime-dropdown {
     width: 70px;
     background-color: #f6f1ed;
 }
@@ -183,8 +193,21 @@ body {
         font-size: 0.7em;
     }
 
-    .dropdown-pane {
+    .filter-title-bar {
+        height: 120px;
+    }
+
+    .filter-title-bar .top-bar-right button {
+        margin-top: 40px;
+    }
+
+    .crime-dropdown {
         width: 50px;
+    }
+
+    .submenu a,
+    .submenu .submenu-title {
+        text-align: right;
     }
 
     .mobile-ofc .menu a {
