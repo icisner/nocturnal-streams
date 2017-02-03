@@ -196,5 +196,7 @@ Alternatively, the shortened url [`goo.gl/gFy5tQ`](https://goo.gl/gFy5tQ) works 
     <https://icons8.com/web-app/13034/thriller>
 - Check All
     <https://icons8.com/web-app/24522/check-all>
+- Uncheck All
+    <https://icons8.com/web-app/35041/uncheck-all>
 - Info
     <https://icons8.com/web-app/12253/info>
