@@ -63,6 +63,7 @@ ko.bindingHandlers.anothermap = {
 
                 // Load crime data when a location marker is clicked,
                 marker.addListener("click", function() {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
                     updateData(mapObj, marker);
                 });
                 // Add listener function when infowindow is closed.
@@ -256,9 +257,10 @@ var updateData = function(mapObj, marker) {
                 mapObj.crimeMarkers().push(marker);
             }
         });
-        $("#crime-filter-button").removeAttr("disabled")
+        $("#crime-filter-button").removeAttr("disabled");
         mapObj.googleMap.setCenter(marker.position);
         mapObj.googleMap.setZoom(16);
+        marker.setAnimation(null);
     })
         .fail(function(jqxhr, textStatus, error) {
             var $message = error_message("Failed to get crime data from server");
