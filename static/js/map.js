@@ -3,7 +3,7 @@
 * @param {Object} data - location data
 */
 var Location = function(data) {
-    this.id = data["id"]
+    this.id = data["id"];
     this.areaname = data["name"];
     this.safetylevel = data["safelevel"];
     this.crimecount = data["count"];

@@ -65,13 +65,13 @@ body {
 }
 
 .mobile-ofc .menu a {
-    height: 45px;
-    line-height: 45px;
+    height: 35px;
+    line-height: 35px;
     color: #f6f1ed;
     font-weight: 700;
     font-size: 0.9em;
-    paddin-top: 0;
-    padding-buttom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .filter-title-bar {
@@ -92,6 +92,11 @@ body {
     font-weight: 700;
     background-color: #6a5750;
     color: #f6f1ed;
+}
+
+.submenu-item {
+    padding-left: 5px;
+    height: 35px;
 }
 
 .safety-level-title {
@@ -130,8 +135,8 @@ body {
     text-shadow: 1px 1px 1px #ccc;
 }
 
-.submenu-item {
-    padding-left: 5px;
+.location-item {
+    line-height: 30px;
 }
 
 .crime-filter-button {
@@ -215,7 +220,11 @@ body {
     }
 
     .crime-dropdown {
-        width: 80px;
+        width: 60px;
+    }
+
+    .crime-filter-button {
+        margin-top: 10px;
     }
 
     .submenu a,
@@ -223,7 +232,14 @@ body {
         text-align: right;
     }
 
+    .submenu-item {
+        padding-right: 5px;
+        height: 25px;
+    }
+
     .mobile-ofc .menu a {
         font-size: 0.7em;
+        height: 25px;
+        line-height: 25px;
     }
 }
