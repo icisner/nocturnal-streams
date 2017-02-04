@@ -64,14 +64,13 @@
           <ul class="submenu menu vertical" data-submenu>
             <li class="submenu-title">Area List</li>
             {% for loc in locations %}
-            <li class="submenu-item"
-                id="{{loc['id']}}"
-                data-bind="event: { mouseover:
-                           setCurrent.bind($data,'{{loop.index}}','{{loc['lat']}}','{{loc['lng']}}')}">
+            <li class="submenu-item" id="{{loc['id']}}">
               <a class="location-item" href="#"
                  data-bind="click:
                             activateCurrent.bind($data,'{{loop.index}}',
-                            '{{loc['lat']}}','{{loc['lng']}}')">
+                            '{{loc['lat']}}','{{loc['lng']}}'),
+                            event: { mouseover:
+                            setCurrent.bind($data,'{{loop.index}}','{{loc['lat']}}','{{loc['lng']}}')}">
                 {{loc['name']}}
               </a>
             </li>

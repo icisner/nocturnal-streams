@@ -97,6 +97,7 @@ body {
 .submenu-item {
     padding-left: 5px;
     height: 35px;
+    border-bottom: 1px solid #f6f1ed;
 }
 
 .safety-level-title {
@@ -230,6 +231,10 @@ body {
     .submenu a,
     .submenu .submenu-title {
         text-align: right;
+    }
+
+    .submenu-title {
+        padding-right: 5px;
     }
 
     .submenu-item {
