@@ -62,9 +62,10 @@ ko.bindingHandlers.anothermap = {
                 });
 
                 // Load crime data when a location marker is clicked,
+                // When crime markers appears, it zooms to current center
                 marker.addListener("click", function() {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
-                    updateData(mapObj, marker);
+                    updateData(mapObj, marker, true);
                 });
                 // Add listener function when infowindow is closed.
                 marker.info.addListener("closeclick", function() {
@@ -91,6 +92,15 @@ ko.bindingHandlers.anothermap = {
 
         // Watches a currentMarker state change
         mapObj.currentMarker.subscribe(mapObj.onCurrentChange);
+
+        // Load crime data and renders markers without zoom
+        mapObj.onCurrentActivate = function(data) {
+            var marker = mapObj.currentMarker();
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            updateData(mapObj, marker, false);
+        }
+        // Watches a crimeDataRequested state change
+        mapObj.dataRequested.subscribe(mapObj.onCurrentActivate);
 
         // Re-render crime markers looking at a current category state
         mapObj.onChangedCrimeFilter = function(data) {
@@ -220,7 +230,7 @@ var isVisible = function(mapObj, entry) {
 };
 
 // Load crime data
-var updateData = function(mapObj, marker) {
+var updateData = function(mapObj, marker, focus) {
     // Clear crime markers in an old location
     clearCrimeMarkers(mapObj);
     var lat = marker.position.lat();
@@ -258,8 +268,10 @@ var updateData = function(mapObj, marker) {
             }
         });
         $("#crime-filter-button").removeAttr("disabled");
-        mapObj.googleMap.setCenter(marker.position);
-        mapObj.googleMap.setZoom(16);
+        if (focus) {
+            mapObj.googleMap.setCenter(marker.position);
+            mapObj.googleMap.setZoom(16);
+        }
         marker.setAnimation(null);
     })
         .fail(function(jqxhr, textStatus, error) {
@@ -291,6 +303,8 @@ var mapModel = function() {
         currentMarker: ko.observable(),
         // all crime markers of the current location
         crimeMarkers: ko.observableArray([]),
+        // flag to signal marker data loading request
+        dataRequested: ko.observable(false),
         // current category (filter)
         category: ko.observable("all"),
     });
@@ -299,6 +313,17 @@ var mapModel = function() {
     this.setCurrent = function(index, lat, lng) {
         self.mapState().previousMarker(self.mapState().currentMarker());
         self.mapState().currentMarker(self.mapState().locMarkers()[parseInt(index)-1]);
+    };
+
+    this.activateCurrent = function(index, lat, lng) {
+        self.setCurrent(index, lat, lng);
+        var current = self.mapState().dataRequested();
+        console.log("current state: " + current);
+        if (current) {
+            self.mapState().dataRequested(false);
+        } else {
+            self.mapState().dataRequested(true);
+        }
     };
 
     // Change the current safety level
