@@ -154,7 +154,7 @@ var locationContent = function(loc) {
     content += '<div class="area-info-window">Area Name: <b>';
     content += loc.areaname + "</b><br/>";
     content += "Number of Crimes: " + loc.crimecount + "<br/>";
-    content += "<br/><b>Click</b> the pin for this area's crime data</div>";
+    content += "<br/><b>Click</b> pin to load crime data</div>";
     return content;
 }
 
@@ -318,7 +318,6 @@ var mapModel = function() {
     this.activateCurrent = function(index, lat, lng) {
         self.setCurrent(index, lat, lng);
         var current = self.mapState().dataRequested();
-        console.log("current state: " + current);
         if (current) {
             self.mapState().dataRequested(false);
         } else {
