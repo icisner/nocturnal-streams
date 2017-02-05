@@ -180,6 +180,20 @@ body {
     padding: 0.1rem 3.0rem 0.1rem 0.2rem;
 }
 
+.social-icons {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.social-icons a {
+    padding-right: 10px;
+}
+
+.copyright,
+.attribution {
+    font-weight: 700;
+}
+
 .row {
     margin: 0px;
     padding: 2px;
