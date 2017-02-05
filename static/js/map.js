@@ -175,7 +175,7 @@ var filterCrimeMarkers = function(mapObj) {
         if ($("#crime-dropdown").hasClass("is-open")) {
             $("#crime-dropdown").removeClass("is-open");
         }
-        $("#crime-filter-button").attr("disabled", '')
+        mapObj.crimeFilterButton(false);
     } else {
         var markers = mapObj.crimeMarkers();
         for(var i=0; i<markers.length; i++) {
@@ -270,7 +270,7 @@ var updateData = function(mapObj, marker) {
         marker.setAnimation(null);
         mapObj.googleMap.setCenter(marker.position);
         mapObj.googleMap.setZoom(16);
-        $("#crime-filter-button").removeAttr("disabled");
+        mapObj.crimeFilterButton(true);
     })
         .fail(function(jqxhr, textStatus, error) {
             var $message = error_message("Failed to get crime data from server");
@@ -303,6 +303,8 @@ var mapModel = function() {
         crimeMarkers: ko.observableArray([]),
         // flag to signal marker data loading request
         dataRequested: ko.observable(false),
+        // flag to signal Crime Filter button to toggle show/hide
+        crimeFilterButton: ko.observable(false),
         // current category (filter)
         category: ko.observable("all"),
     });
@@ -333,6 +335,10 @@ var mapModel = function() {
         self.mapState().category(data);
     };
 
+    // Return the state of Crime Filter button
+    this.getCrimeFilterButton = function() {
+        return self.mapState().crimeFilterButton();
+    }
 }
 
 $(document).ready(function () {

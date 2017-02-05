@@ -38,8 +38,11 @@
                 </div>
               </div>
               <div class="top-bar-right">
-                <button id="crime-filter-button" class="button float-right small" type="button"
-                        data-toggle="crime-dropdown" disabled>
+                <button id="crime-filter-button"
+                        data-bind="enable: getCrimeFilterButton()"
+                        class="button float-right small"
+                        type="button"
+                        data-toggle="crime-dropdown">
                   <span class="menu-button-face">Crime Filter</span>
                 </button>
                 <div class="dropdown-pane crime-dropdown" id="crime-dropdown"
