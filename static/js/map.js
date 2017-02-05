@@ -24,7 +24,6 @@ ko.bindingHandlers.anothermap = {
         mapObj.initialLoc(new Location({"areaname": areaname, "lat": lat, "lng": lng}));
         // Load all area name data
         areanameData(mapObj);
-        $("#" + element.getAttribute("id")).data("mapObj",mapObj);
     },
     update: function (element, valueAccessor, allBindings, viewModel) {
         var value = valueAccessor();
