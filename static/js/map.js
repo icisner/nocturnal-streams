@@ -120,17 +120,6 @@ ko.bindingHandlers.anothermap = {
     }
 };
 
-// Create DOM elements to show error message
-var error_message = function(text) {
-    var message = '';
-    message += '<div class="callout alert" data-closable>\n';
-    message += text + '\n';
-    message += '  <button class="close-button callout-alert-button" aria-label="Dismiss alert" type="button" data-close>\n';
-    message += '    <span aria-hidden="true">&times;</span>\n';
-    message += '  </button>\n'
-    message += '</div>';
-    return $(message)
-}
 
 // Load location data
 var areanameData = function(mapObj) {
@@ -143,8 +132,8 @@ var areanameData = function(mapObj) {
         mapObj.locationLoaded(true);
     })
         .fail(function(jqxhr, textStatus, error) {
-            var $message = error_message("Failed to get area info from server");
-            $("#error-area").prepend($message);
+            mapObj.errorMessage("Failed to get area info from server");
+            mapObj.showErrorMessage(true);
         });
 };
 
@@ -273,8 +262,8 @@ var updateData = function(mapObj, marker) {
         mapObj.crimeFilterButton(true);
     })
         .fail(function(jqxhr, textStatus, error) {
-            var $message = error_message("Failed to get crime data from server");
-            $("#error-area").prepend($message);
+            mapObj.errorMessage("Failed to get crime data from server");
+            mapObj.showErrorMessage(true);
         });
 };
 
@@ -307,6 +296,10 @@ var mapModel = function() {
         crimeFilterButton: ko.observable(false),
         // current category (filter)
         category: ko.observable("all"),
+        // error message
+        errorMessage: ko.observable(""),
+        // show/hide error message HTML block
+        showErrorMessage: ko.observable(false)
     });
 
     // Change the current location
@@ -328,7 +321,7 @@ var mapModel = function() {
     // Change the current safety level
     this.setSafetyLevel = function(data) {
         self.mapState().safetyLevel(data);
-    }
+    };
 
     // Change the current category (filter)
     this.setCategory = function(data) {
@@ -338,7 +331,23 @@ var mapModel = function() {
     // Return the state of Crime Filter button
     this.getCrimeFilterButton = function() {
         return self.mapState().crimeFilterButton();
-    }
+    };
+
+    // Return error message
+    this.getErrorMessage = function() {
+        return self.mapState().errorMessage();
+    };
+
+    // Return showErrorMessage state
+    this.shouldShowErrorMessage = function() {
+        return self.mapState().showErrorMessage();
+    };
+
+    // Change showErrorMessage state to false
+    this.dismissErrorMessage = function() {
+        self.mapState().showErrorMessage(false);
+    };
+
 }
 
 $(document).ready(function () {
