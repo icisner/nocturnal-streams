@@ -368,8 +368,7 @@ var mapModel = function() {
 }
 
 function googleMapError() {
-    alert("error should be here");
-    console.log("error should be here");
+    alert("Failed to start app. Check Internet connection, URL, etc. Then, reload.");
 };
 
 var initMap = function() {
