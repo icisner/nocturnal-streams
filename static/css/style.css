@@ -109,9 +109,10 @@ body {
     font-weight: 700;
     font-size: 0.8em;
     padding-bottom: 10px;
+    width: 35px;
 }
 
-.menu.vertical li:hover {
+.safety-dropdown div:hover {
     background-color: #d4ccc7;
 }
 
@@ -148,7 +149,7 @@ body {
 
 .safety-dropdown {
     padding-top: 10px;
-    padding-left: 15px;
+    margin-left: 15px;
 }
 
 .crime-dropdown {

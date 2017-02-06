@@ -306,7 +306,6 @@ var mapModel = function() {
     };
 
     this.shouldShowLocation = function(index) {
-        console.log("location: " + index);
         var current = self.mapState().safetyLevel();
         if (0 == current) {
             return true;
