@@ -13,6 +13,7 @@ var Location = function(data) {
 
 // Knockout JS custom handler definition
 ko.bindingHandlers.anothermap = {
+    // init function of this custom binding
     init: function (element, valueAccessor, allBindings, viewModel) {
         // values come from html data-binding
         var value = valueAccessor();
@@ -25,6 +26,7 @@ ko.bindingHandlers.anothermap = {
         // Load all area name data
         areanameData(mapObj);
     },
+    // update function of this custom binding
     update: function (element, valueAccessor, allBindings, viewModel) {
         var value = valueAccessor();
         var mapObj = ko.unwrap(value.mapState);
@@ -295,6 +297,7 @@ var mapModel = function() {
         self.mapState().currentMarker(self.mapState().locMarkers()[parseInt(index)-1]);
     };
 
+    // Change the current location and load crime data
     this.activateCurrent = function(index, lat, lng) {
         self.setCurrent(index, lat, lng);
         var current = self.mapState().dataRequested();
@@ -305,6 +308,7 @@ var mapModel = function() {
         }
     };
 
+    // Return truthy value whether a location should be visible or not
     this.shouldShowLocation = function(index) {
         var current = self.mapState().safetyLevel();
         if (0 == current) {
@@ -321,6 +325,7 @@ var mapModel = function() {
         self.mapState().showSafetyLevel(!current);
     };
 
+    // Return the current safety level
     this.shouldShowSafetyLevel = function() {
         return self.mapState().showSafetyLevel();
     };
@@ -341,6 +346,7 @@ var mapModel = function() {
         self.mapState().showCrimeFilter(!current);
     };
 
+    // Return the value of showCrimeFilter to show/hide Crime Filter Button
     this.shouldShowCrimeFilter = function() {
         return self.mapState().showCrimeFilter();
     };
@@ -367,10 +373,12 @@ var mapModel = function() {
 
 };
 
+// Error handling function
 function googleMapError() {
     alert("Failed to start app. Check Internet connection, URL, etc. Then, reload.");
 }
 
+// Callback function when Google Map is loaded
 var initMap = function() {
     ko.applyBindings(new mapModel());
 };
