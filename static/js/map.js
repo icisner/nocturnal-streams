@@ -367,6 +367,11 @@ var mapModel = function() {
 
 }
 
-$(document).ready(function () {
-   ko.applyBindings(new mapModel);
-});
+function googleMapError() {
+    alert("error should be here");
+    console.log("error should be here");
+};
+
+var initMap = function() {
+    ko.applyBindings(new mapModel);
+}
