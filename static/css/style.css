@@ -272,4 +272,10 @@ body {
         height: 25px;
         line-height: 25px;
     }
+
+    .copyright,
+    .attribution {
+        font-size: 0.7em;
+    }
+
 }
