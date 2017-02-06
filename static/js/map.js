@@ -160,9 +160,7 @@ var filterCrimeMarkers = function(mapObj) {
     if ("clear" == filter) {
         clearCrimeMarkers(mapObj);
         mapObj.category("all");
-        if ($("#crime-dropdown").hasClass("is-open")) {
-            $("#crime-dropdown").removeClass("is-open");
-        }
+        mapObj.showCrimeFilter(false);
         mapObj.crimeFilterButton(false);
     } else {
         var markers = mapObj.crimeMarkers();
@@ -283,6 +281,8 @@ var mapModel = function() {
         locMarkers: ko.observableArray([]),
         // safety level of locations, 1-3
         safetyLevel: ko.observable(0),
+        // flag to show/hide safety level menu
+        showSafetyLevel: ko.observable(true),
         // previous location marker
         previousMarker: ko.observable(),
         // current location marker
@@ -293,6 +293,8 @@ var mapModel = function() {
         dataRequested: ko.observable(false),
         // flag to signal Crime Filter button to toggle show/hide
         crimeFilterButton: ko.observable(false),
+        // flag to show/hide safety level menu
+        showCrimeFilter: ko.observable(true),
         // current category (filter)
         category: ko.observable("all"),
         // error message
@@ -317,6 +319,18 @@ var mapModel = function() {
         }
     };
 
+    // Toggle the current state of showSafetyLevel
+    this.toggleShowSafetyLevel = function() {
+        var current = self.mapState().showSafetyLevel();
+        console.log("show safety level: " + current);
+        self.mapState().showSafetyLevel(!current);
+    };
+
+    this.shouldShowSafetyLevel = function() {
+        console.log("shoudShowSafetyLevel");
+        return self.mapState().showSafetyLevel();
+    };
+
     // Change the current safety level
     this.setSafetyLevel = function(data) {
         self.mapState().safetyLevel(data);
@@ -326,6 +340,17 @@ var mapModel = function() {
     this.setCategory = function(data) {
         self.mapState().category(data);
     };
+
+    // Toggle show/hide crime filters
+    this.toggleShowCrimeFilter = function() {
+        var current = self.mapState().showCrimeFilter();
+        console.log("show crime filter: " + current);
+        self.mapState().showCrimeFilter(!current);
+    }
+
+    this.shouldShowCrimeFilter = function() {
+        return self.mapState().showCrimeFilter();
+    }
 
     // Return the state of Crime Filter button
     this.getCrimeFilterButton = function() {

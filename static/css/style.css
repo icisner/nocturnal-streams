@@ -75,7 +75,6 @@ body {
 }
 
 .filter-title-bar {
-    height: 60px;
     background-color: #f6f1ed;
 }
 
@@ -109,8 +108,7 @@ body {
     color: #6a5750;
     font-weight: 700;
     font-size: 0.8em;
-    padding-left: 3px;
-    padding-right: 2px;
+    padding-bottom: 10px;
 }
 
 .menu.vertical li:hover {
@@ -149,12 +147,12 @@ body {
 }
 
 .safety-dropdown {
-    padding: 5px;
-    width: 120px;
+    padding-top: 10px;
+    padding-left: 15px;
 }
 
 .crime-dropdown {
-    width: 100px;
+    padding-left: 20px;
     background-color: #f6f1ed;
 }
 
