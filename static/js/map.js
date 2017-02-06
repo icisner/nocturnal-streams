@@ -177,23 +177,9 @@ var filterCrimeMarkers = function(mapObj) {
 
 // Filter location markers
 var filterLocations = function(mapObj) {
-    var locations = mapObj.locations();
     var markers = mapObj.locMarkers();
     var level = mapObj.safetyLevel()
-    for(var i=0; i<locations.length; i++) {
-        var loc = locations[i];
-        var itemId = "#" + loc.id;
-        if (0 == level || loc.safetylevel == level) {
-            if ($(itemId).hasClass("hide")) {
-                $(itemId).removeClass("hide");
-            }
-            $(itemId).addClass("show");
-        } else {
-            if ($(itemId).hasClass("show")) {
-                $(itemId).removeClass("show");
-            }
-            $(itemId).addClass("hide");
-        }
+    for(var i=0; i<markers.length; i++) {
         var marker = markers[i];
         if (0 == level || marker.safetylevel == level) {
             marker.setVisible(true);
@@ -316,6 +302,17 @@ var mapModel = function() {
             self.mapState().dataRequested(false);
         } else {
             self.mapState().dataRequested(true);
+        }
+    };
+
+    this.shouldShowLocation = function(index) {
+        console.log("location: " + index);
+        var current = self.mapState().safetyLevel();
+        if (0 == current) {
+            return true;
+        } else {
+            var safety = self.mapState().locMarkers()[parseInt(index)-1].safetylevel;
+            return current == safety;
         }
     };
 

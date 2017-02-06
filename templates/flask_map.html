@@ -63,7 +63,8 @@
           <ul class="submenu menu vertical">
             <li class="submenu-title">Area List</li>
             {% for loc in locations %}
-            <li class="submenu-item" id="{{loc['id']}}">
+            <li data-bind="visible: shouldShowLocation({{loop.index}})"
+                class="submenu-item" id="{{loc['id']}}">
               <a class="location-item" href="#"
                  data-bind="click:
                             activateCurrent.bind($data,'{{loop.index}}',
