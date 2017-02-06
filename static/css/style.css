@@ -225,19 +225,31 @@ body {
     }
 
     .filter-title-bar {
-        height: 120px;
+
     }
 
     .filter-title-bar .top-bar-right button {
-        margin-top: 40px;
+        margin-top: 5px;
+    }
+
+    .safety-dropdown {
+        display: flex;
+        padding: 5px 3px 0px;
+    }
+
+    .safety-level-item {
+        margin: auto;
     }
 
     .crime-dropdown {
-        width: 60px;
+        padding: 5px 2px 0px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
     }
 
     .crime-filter-button {
-        margin-top: 10px;
+        margin: auto;
     }
 
     .submenu a,

@@ -322,12 +322,10 @@ var mapModel = function() {
     // Toggle the current state of showSafetyLevel
     this.toggleShowSafetyLevel = function() {
         var current = self.mapState().showSafetyLevel();
-        console.log("show safety level: " + current);
         self.mapState().showSafetyLevel(!current);
     };
 
     this.shouldShowSafetyLevel = function() {
-        console.log("shoudShowSafetyLevel");
         return self.mapState().showSafetyLevel();
     };
 
@@ -344,7 +342,6 @@ var mapModel = function() {
     // Toggle show/hide crime filters
     this.toggleShowCrimeFilter = function() {
         var current = self.mapState().showCrimeFilter();
-        console.log("show crime filter: " + current);
         self.mapState().showCrimeFilter(!current);
     }
 

@@ -23,19 +23,17 @@
                 </button>
                 <div data-bind="visible: shouldShowSafetyLevel()"
                      class="safety-dropdown">
-                  <div class="">
-                    {% for safety in safety_levels %}
-                    <div class="safety-level-item"
-                        data-bind="event: {
-                                   mouseover: setSafetyLevel.bind($data, '{{safety['level']}}')}">
-                      <i class="fa fa-square fa-2x {{safety['style']}} has-tip"
-                         data-tooltip
-                         aria-hidden="true"
-                         aria-haspopup="true" data-disable="false"
-                         title="{{safety['title']}}"></i>
-                    </div>
-                    {% endfor %}
+                  {% for safety in safety_levels %}
+                  <div class="safety-level-item"
+                       data-bind="event: {
+                                  mouseover: setSafetyLevel.bind($data, '{{safety['level']}}')}">
+                    <i class="fa fa-square fa-2x {{safety['style']}} has-tip"
+                       data-tooltip
+                       aria-hidden="true"
+                       aria-haspopup="true" data-disable="false"
+                       title="{{safety['title']}}"></i>
                   </div>
+                  {% endfor %}
                 </div>
               </div>
               <div class="top-bar-right">
@@ -102,8 +100,8 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="small-12 columns">
+      <div class="row expanded">
+        <div class="small-12 large-12 columns">
           <div id="map" data-bind="anothermap: {mapState: mapState,
                                    centerLat: 35.845170,
                                    centerLng: -78.673948,
